@@ -1,21 +1,28 @@
-.App {
+.app {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
   text-align: center;
 }
 
-.App-logo {
+.app_logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 50px;
 }
 
-.App-header {
+.app_header {
+  min-height: 8%;
+  padding: 10px;
+
   background-color: #222;
-  height: 150px;
-  padding: 20px;
   color: white;
 }
 
-.App-intro {
-  font-size: large;
+.app_header h4 {
+  margin: 5px;
 }
 
 @keyframes App-logo-spin {
