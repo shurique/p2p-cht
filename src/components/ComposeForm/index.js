@@ -1,18 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import './ComposeForm.css';
 
-class ComposeForm extends Component {
+class ComposeForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { text: '' };
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log('click click', this.state.text.trim());
+  }
+
+  handleTextChange(e) {
+    this.setState({ text: e.target.innerText });
+  }
+
   render() {
     return(
-      <div className="compose_form clearfix">
+      <form className="compose_form clearfix"
+            onSubmit={this.handleSubmit}>
         <div className="cf_input">
-          <div className="form-control" contentEditable="true"></div>
+          <div className="form-control"
+               contentEditable="true"
+               onInput={this.handleTextChange}
+               ></div>
         </div>
         <div className="cf_controls center-block">
           <button type="submit" className="btn btn-primary">Send</button>
         </div>
-      </div>
+      </form>
     );
   }
 }
