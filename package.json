@@ -6,8 +6,11 @@
     "react-scripts": "0.4.3"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "bootstrap": "^3.3.7",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "remarkable": "^1.6.2"
   },
   "scripts": {
     "start": "react-scripts start",

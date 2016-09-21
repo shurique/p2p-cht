@@ -11,7 +11,6 @@ class App extends Component {
       <div className="app">
         <div className="app_header">
           <img src={logo} className="app_logo" alt="logo" />
-          <h4>Welcome to React</h4>
         </div>
 
         <HistoryWrap />

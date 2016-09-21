@@ -1,0 +1,40 @@
+.message {
+  width: 70%;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+  align-self: flex-start;
+  background-color: #FFF;
+  box-shadow: 5px 5px 10px 0px #CCD5DC;
+}
+
+.message.owner {
+  align-self: flex-end;
+  background-color: #EFFDDE;
+  box-shadow: 5px 5px 10px 0px #B6DCC0;
+}
+
+.message .msg_author {
+  display: block;
+  float: left;
+  font-weight: bold;
+}
+
+.message .msg_body {
+  text-align: left;
+}
+
+.message .msg_body p {
+  margin: 10px 0 10px 0;
+  padding: 0;
+}
+
+.message .msg_timestamp {
+  display: block;
+  float: right;
+  color: #ACACC0;
+}
+
+.message.owner .msg_timestamp {
+  color: #ACCA64;
+}
