@@ -1,3 +1,23 @@
 .compose_form {
   min-height: 7%;
+  padding: 10px;
+}
+
+.compose_form .cf_input,
+.compose_form .cf_controls {
+  display: block;
+  float: left;
+}
+
+.compose_form .cf_input {
+  width: 90%;
+  text-align: left;
+}
+
+.compose_form .cf_controls {
+  width: 10%;
+}
+
+.compose_form .cf_controls .btn {
+  margin: auto;
 }

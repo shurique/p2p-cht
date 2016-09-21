@@ -14,7 +14,7 @@ const data = [
   {
     id: 2,
     author: 'User2',
-    text: 'Hello from User2',
+    text: 'Hello from User2 kasdjlksdj f;lajsd fkljasd fadf kldjasf kljasdklfj adklsjf kljasdfkl jadklsfj dfkldjas fkljasdfkl jasdklfj dasf kljasdlfk jasfkl jadf kldjsf lahsgw[eit pwrjt90u 40gjkefgj -=21rg fjgkljdf;lg dsfkjg lsjdflg jd;flsg] Hello from User2 kasdjlksdj f;lajsd fkljasd fadf kldjasf kljasdklfj adklsjf kljasdfkl jadklsfj dfkldjas fkljasdfkl jasdklfj dasf kljasdlfk jasfkl jadf kldjsf lahsgw[eit pwrjt90u 40gjkefgj -=21rg fjgkljdf;lg dsfkjg lsjdflg jd;flsg]',
     timestamp: 1474399514715,
     owner: false
   },
