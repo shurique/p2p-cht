@@ -31,6 +31,42 @@ const data = [
     timestamp: 1474399514815,
     owner: true,
   },
+  {
+    id: 4,
+    author: 'User3',
+    text: 'Hello from User3',
+    timestamp: 1474399514815,
+    owner: true,
+  },
+  {
+    id: 5,
+    author: 'User3',
+    text: 'Hello from User3',
+    timestamp: 1474399514815,
+    owner: true,
+  },
+  {
+    id: 6,
+    author: 'User3',
+    text: 'Hello from User3',
+    timestamp: 1474399514815,
+    owner: true,
+  },
+  {
+    id: 7,
+    author: 'User3',
+    text: 'Hello from User3',
+    timestamp: 1474399514815,
+    owner: true,
+  },
+  {
+    id: 8,
+    author: 'User3',
+    text: 'Hello from User3',
+    timestamp: 1474399514815,
+    owner: true,
+  },
+
 ];
 
 const store = configureStore();

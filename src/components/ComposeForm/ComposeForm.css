@@ -1,10 +1,19 @@
+.cf_wrap {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: #fff;
+  height: 60px;
+}
+
 .compose_form {
-  min-height: 7%;
   padding: 10px;
 }
 
-.compose_form .cf_input,
-.compose_form .cf_controls {
+.compose_form .cf_input, .compose_form .cf_controls {
   display: block;
   float: left;
 }
