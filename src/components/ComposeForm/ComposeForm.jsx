@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import './ComposeForm.css';
 
-class ComposeForm extends React.Component {
+const propTypes = {
+  onMessageSubmit: PropTypes.func.isRequired,
+};
+
+class ComposeForm extends Component {
   constructor(props) {
     super(props);
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = { text: '' };
+    this.htmlEl = null;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('click click', this.state.text.trim());
+    const text = this.state.text.trim();
+    if (!text) {
+      return;
+    }
+    this.props.onMessageSubmit({ text });
+    this.setState({ text: '' });
+    this.htmlEl.innerText = '';
   }
 
   handleTextChange(e) {
@@ -28,6 +39,7 @@ class ComposeForm extends React.Component {
       >
         <div className="cf_input">
           <div
+            ref={(e) => { this.htmlEl = e; }}
             className="form-control"
             contentEditable="true"
             onInput={this.handleTextChange}
@@ -40,5 +52,7 @@ class ComposeForm extends React.Component {
     );
   }
 }
+
+ComposeForm.propTypes = propTypes;
 
 export default ComposeForm;
