@@ -12,6 +12,26 @@ const propTypes = {
 };
 
 class Message extends Component {
+  constructor(props) {
+    super(props);
+
+    this.scrollLast = this.scrollLast.bind(this);
+    this.el = null;
+  }
+
+
+  componentDidMount() {
+    this.scrollLast();
+  }
+
+  componentDidUpdate() {
+    this.scrollLast();
+  }
+
+  scrollLast() {
+    this.el.scrollIntoView({ block: 'end', behavior: 'smooth' });
+  }
+
   rawMarkup() {
     const md = new Remarkable();
     return {
@@ -40,7 +60,10 @@ class Message extends Component {
     });
 
     return (
-      <div className={classname}>
+      <div
+        className={classname}
+        ref={(el) => { this.el = el; }}
+      >
         <div className="msg_header clearfix">
           <span className="msg_author">{author}</span>
         </div>
