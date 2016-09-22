@@ -21,7 +21,7 @@ class ComposeForm extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <form className="compose_form clearfix"
             onSubmit={this.handleSubmit}>
         <div className="cf_input">

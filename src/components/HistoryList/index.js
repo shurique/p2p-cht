@@ -1,27 +1,13 @@
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import './HistoryList.css';
-import Message from '../Message';
+import HistoryList from './HistoryList';
 
-class HistoryList extends Component {
-  render() {
-    let messages = this.props.data.map((message) => {
-      return(
-        <Message key={message.id}
-                 author={message.author}
-                 timestamp={message.timestamp}
-                 owner={message.owner}>
-          {message.text}
-        </Message>
-      );
-    });
+function mapStateToProps(state) {
+  const { messages } = state.history;
 
-    return(
-      <div className="history_list">
-        { messages }
-      </div>
-    );
-  }
+  return {
+    messages,
+  };
 }
 
-export default HistoryList;
+export default connect(mapStateToProps)(HistoryList);

@@ -1,5 +1,6 @@
-import { newMessage } from '../actions';
+import { setMessages, newMessage } from './message';
 
-export default {
+export {
+  setMessages,
   newMessage,
 };

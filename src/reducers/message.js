@@ -1,12 +1,15 @@
 import * as actionTypes from '../constants/actionTypes';
 
-const initialState = {};
+const initialState = {
+  messages: [],
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.NEW_MESSAGE: {
-      const { message } = action;
-      return [...state, ...message];
+    case actionTypes.SET_MESSAGES: {
+      return Object.assign({}, state, {
+        messages: action.messages,
+      });
     }
     default:
       return state;
