@@ -5,11 +5,11 @@ import './HistoryWrap.css';
 
 class HistoryWrap extends Component {
   render() {
-    return(
+    return (
       <div className="history_wrap">
         <HistoryList />
       </div>
-    )
+    );
   }
 }
 
