@@ -1,6 +1,6 @@
-import { setMessages, newMessage } from './message';
+import { setMessages, saveMessage } from './message';
 
 export {
   setMessages,
-  newMessage,
+  saveMessage,
 };

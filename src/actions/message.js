@@ -14,8 +14,16 @@ function newMessage(message) {
   };
 }
 
+function saveMessage(message) {
+  return function (dispatch, getState) {
+    dispatch(newMessage(message));
+
+    console.log('some other', getState());
+  };
+}
+
 
 export {
-  newMessage,
+  saveMessage,
   setMessages,
 };
