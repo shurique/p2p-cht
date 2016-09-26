@@ -70,6 +70,7 @@ const data = [
 ];
 
 const store = configureStore();
+
 store.dispatch(actions.setMessages(data));
 
 ReactDOM.render(

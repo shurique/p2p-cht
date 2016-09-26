@@ -15,10 +15,10 @@ function newMessage(message) {
 }
 
 function saveMessage(message) {
-  return function (dispatch, getState) {
+  return function (dispatch, getState, ws) {
     dispatch(newMessage(message));
 
-    console.log('some other', getState());
+    ws.send(message);
   };
 }
 
