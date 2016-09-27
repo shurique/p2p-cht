@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import HistoryWrap from '../HistoryWrap';
+import HistoryList from '../HistoryList';
 import ComposeForm from '../ComposeForm';
 import logo from './logo.svg';
 import './App.css';
@@ -13,7 +13,7 @@ class App extends Component {
           <img src={logo} className="app_logo" alt="logo" />
         </div>
 
-        <HistoryWrap />
+        <HistoryList />
 
         <ComposeForm />
       </div>
