@@ -5,7 +5,9 @@ import * as actions from '../../actions';
 import ComposeForm from './ComposeForm';
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    author: state.chat.username,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

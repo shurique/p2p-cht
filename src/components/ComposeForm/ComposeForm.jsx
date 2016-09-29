@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import './ComposeForm.css';
 
 const propTypes = {
+  author: PropTypes.string.isRequired,
   onMessageSubmit: PropTypes.func.isRequired,
 };
 
@@ -18,11 +19,15 @@ class ComposeForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const text = this.state.text.trim();
-    if (!text) {
+    const message = {
+      text: this.state.text.trim(),
+      author: this.props.author,
+    };
+
+    if (!message.text) {
       return;
     }
-    this.props.onMessageSubmit({ text });
+    this.props.onMessageSubmit(message);
     this.setState({ text: '' });
     this.htmlEl.innerText = '';
   }
