@@ -11,6 +11,10 @@ export default function (state = initialState, action) {
         username: action.data.username,
       });
     }
+    case actionTypes.RECEIVE_WS_MESSAGE: {
+      debugger;
+      return state;
+    }
     default:
       return state;
   }

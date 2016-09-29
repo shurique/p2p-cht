@@ -1,16 +1,19 @@
-export default function createWS(url = 'localhost', protocol = 'ws', port = '3001') {
+import * as actions from '../actions';
+
+export default function createWS(options = { store: {}, url: 'localhost', protocol: 'ws', port: '3001' }) {
+  const { store, url, protocol, port } = options;
   const endpoint = `${protocol}://${url}:${port}`;
   const socket = new WebSocket(endpoint);
 
-  const send = function WSSend(data) {
+  const send = function WSSend(type, data) {
     return socket.send(JSON.stringify({
+      type,
       data,
     }));
   };
 
   socket.onopen = function onOpen(event) {
     console.log('Connection created');
-    send('test');
   };
 
   socket.onclose = function onClose(event) {
@@ -19,6 +22,8 @@ export default function createWS(url = 'localhost', protocol = 'ws', port = '300
 
   socket.onmessage = function onMessage(event) {
     console.log('Received data: ', event);
+
+    store.dispatch(actions.receiveMessage(event.data));
   };
 
   socket.onerror = function onError(error) {

@@ -7,6 +7,14 @@ function login(data) {
   };
 }
 
+function receiveMessage(data) {
+  return {
+    type: actionTypes.RECEIVE_WS_MESSAGE,
+    data,
+  };
+}
+
 export {
   login,
+  receiveMessage,
 };

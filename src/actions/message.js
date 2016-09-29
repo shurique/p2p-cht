@@ -37,7 +37,7 @@ function saveMessage(message) {
     const msg = fillMessage(message);
 
     dispatch(newMessage(setOwner(msg, getState().chat.username)));
-    ws.send(msg);
+    ws.send(actionTypes.NEW_MESSAGE, msg);
   };
 }
 
