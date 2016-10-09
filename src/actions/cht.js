@@ -1,5 +1,11 @@
 import * as actionTypes from '../constants/actionTypes';
 
+function wsConnect() {
+  return {
+    type: actionTypes.WS_CONNECT,
+  };
+}
+
 function login(data) {
   return {
     type: actionTypes.LOGIN,
@@ -15,6 +21,7 @@ function receiveMessage(data) {
 }
 
 export {
+  wsConnect,
   login,
   receiveMessage,
 };

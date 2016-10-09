@@ -12,7 +12,6 @@ export default function (state = initialState, action) {
       });
     }
     case actionTypes.RECEIVE_WS_MESSAGE: {
-      debugger;
       return state;
     }
     default:
