@@ -33,11 +33,11 @@ function setOwner(message, username) {
 
 
 function saveMessage(message) {
-  return (dispatch, getState, ws) => {
+  return (dispatch, getState) => {
     const msg = fillMessage(message);
 
     dispatch(newMessage(setOwner(msg, getState().chat.username)));
-    ws.send(actionTypes.NEW_MESSAGE, msg);
+    // ws.send(actionTypes.NEW_MESSAGE, msg);
   };
 }
 
