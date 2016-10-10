@@ -1,10 +1,12 @@
 import { wsConnect, login, receiveMessage } from './cht';
-import { setMessages, saveMessage } from './message';
+import { setMessages, newMessage, setMessage } from './message';
 
 export {
   wsConnect,
   login,
   receiveMessage,
+
   setMessages,
-  saveMessage,
+  newMessage,
+  setMessage,
 };

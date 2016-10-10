@@ -11,7 +11,7 @@ export default function (state = initialState, action) {
         messages: action.messages,
       });
     }
-    case actionTypes.NEW_MESSAGE: {
+    case actionTypes.SET_MESSAGE: {
       return Object.assign({}, state, {
         messages: state.messages.concat(action.message),
       });

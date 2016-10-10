@@ -6,11 +6,13 @@ wss.on('connection', (ws) => {
   ws.on('message', (message) => {
     console.log('received: %s', message);
 
-    const clients = wss.clients.slice(wss.clients.indexOf(ws), 1);
-    clients.forEach((client) => {
-      client.send(message);
-    });
-  });
+    // const clients = wss.clients.splice(wss.clients.indexOf(ws), 1);
+    const clients = wss.clients;
 
-  ws.send('something');
+    console.log(clients.length);
+    clients[1].send(message);
+    // clients.forEach((client) => {
+    //   client.send(message);
+    // });
+  });
 });

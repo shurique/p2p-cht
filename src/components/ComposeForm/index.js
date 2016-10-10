@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onMessageSubmit: bindActionCreators(actions.saveMessage, dispatch),
+    onMessageSubmit: bindActionCreators(actions.newMessage, dispatch),
   };
 }
 

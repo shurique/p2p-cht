@@ -8,6 +8,12 @@ const { url, protocol, port } = options;
 const endpoint = `${protocol}://${url}:${port}`;
 const username = `User_${uuid.v4().split('-')[0]}`;
 
+function setOwner(message, username) {
+  return Object.assign({}, message, {
+    owner: message.author === username,
+  });
+}
+
 const socketMiddleware = () => {
   let socket = null;
 
@@ -24,11 +30,17 @@ const socketMiddleware = () => {
   };
 
   const onMessage = (ws, store) => (event) => {
-    console.log(event.data);
+    const data = JSON.parse(event.data);
 
-    // const message = JSON.parse(event.data);
-    const message = {};
-    store.dispatch(actions.receiveMessage(message));
+    console.log('Receive message', data);
+    switch (data.type) {
+      case actionTypes.NEW_MESSAGE: {
+        store.dispatch(actions.setMessage(setOwner(data.message, store.getState().chat.username)));
+        break;
+      }
+      default:
+        store.dispatch(actions.receiveMessage(data));
+    }
   };
 
   return store => next => (action) => {
@@ -38,7 +50,6 @@ const socketMiddleware = () => {
       case actionTypes.WS_CONNECT: {
         if (!socket) {
           socket = new WebSocket(endpoint);
-
           socket.onmessage = onMessage(socket, store);
           socket.onclose = onClose(socket, store);
           socket.onopen = onOpen(socket, store);
@@ -48,8 +59,11 @@ const socketMiddleware = () => {
       }
       case actionTypes.NEW_MESSAGE: {
         const { message } = action;
-        socket.send(JSON.stringify(message));
-
+        socket.send(JSON.stringify({
+          type: actionTypes.NEW_MESSAGE,
+          message,
+        }));
+        store.dispatch(actions.setMessage(setOwner(message, store.getState().chat.username)));
         break;
       }
       default:
