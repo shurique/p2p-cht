@@ -3,10 +3,8 @@ import uuid from 'node-uuid';
 import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 
-const options = { url: 'localhost', protocol: 'ws', port: '3001' };
-const { url, protocol, port } = options;
-const endpoint = `${protocol}://${url}:${port}`;
-const username = `User_${uuid.v4().split('-')[0]}`;
+const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'ws://localhost:3001';
+const USERNAME = `User_${uuid.v4().split('-')[0]}`;
 
 function setOwner(message, username) {
   return Object.assign({}, message, {
@@ -18,11 +16,7 @@ const socketMiddleware = () => {
   let socket = null;
 
   const onOpen = (ws, store) => (event) => {
-    store.dispatch(
-      actions.login({
-        username,
-      })
-    );
+    store.dispatch(actions.login({ username: USERNAME }));
   };
 
   const onClose = (ws, store) => (event) => {
@@ -49,7 +43,7 @@ const socketMiddleware = () => {
     switch (action.type) {
       case actionTypes.WS_CONNECT: {
         if (!socket) {
-          socket = new WebSocket(endpoint);
+          socket = new WebSocket(ENDPOINT);
           socket.onmessage = onMessage(socket, store);
           socket.onclose = onClose(socket, store);
           socket.onopen = onOpen(socket, store);
