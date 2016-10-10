@@ -38,8 +38,6 @@ const socketMiddleware = () => {
   };
 
   return store => next => (action) => {
-    console.log('Socket middleware: ', action.type);
-
     switch (action.type) {
       case actionTypes.WS_CONNECT: {
         if (!socket) {
