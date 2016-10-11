@@ -20,7 +20,7 @@ function receiveMessage(wsMessage) {
   return (dispatch) => {
     switch (wsMessage.type) {
       case actionTypes.NEW_MESSAGE: {
-        dispatch(messageActions.setMessage(wsMessage.message));
+        dispatch(messageActions.setMessage(wsMessage.data.message));
         break;
       }
       case actionTypes.FETCH_MESSAGES: {

@@ -19,6 +19,9 @@ const socketMiddleware = () => {
     store.dispatch(actions.receiveMessage(wsMessage));
   };
 
+  const wsSend =
+    (ws, type, data = {}) => ws.send(JSON.stringify({ type, data }));
+
   return store => next => (action) => {
     switch (action.type) {
       case actionTypes.WS_CONNECT: {
@@ -31,30 +34,20 @@ const socketMiddleware = () => {
         break;
       }
       case actionTypes.NEW_MESSAGE: {
-        const { message } = action;
-        socket.send(JSON.stringify({
-          type: action.type,
-          message,
-        }));
-        store.dispatch(actions.setMessage(message));
+        wsSend(socket, action.type, { message: action.message });
+
+        store.dispatch(actions.setMessage(action.message));
         break;
       }
       case actionTypes.FETCH_MESSAGES: {
-        socket.send(JSON.stringify({
-          type: action.type,
-        }));
+        wsSend(socket, action.type);
         break;
       }
       case actionTypes.PROVIDE_MESSAGES: {
         const messages = store.getState().history.messages || [];
 
         if (messages.length > 0) {
-          socket.send(JSON.stringify({
-            type: action.type,
-            data: {
-              messages,
-            },
-          }));
+          wsSend(socket, action.type, { messages });
         }
         break;
       }
