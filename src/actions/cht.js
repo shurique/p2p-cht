@@ -1,4 +1,7 @@
+import uuid from 'node-uuid';
+
 import * as actionTypes from '../constants/actionTypes';
+import * as messageActions from './message';
 
 function wsConnect() {
   return {
@@ -20,8 +23,18 @@ function receiveMessage(data) {
   };
 }
 
+function connectionCreated() {
+  const username = `User_${uuid.v4().split('-')[0]}`;
+
+  return (dispatch) => {
+    dispatch(login({ username }));
+    dispatch(messageActions.fetchMessages());
+  };
+}
+
 export {
   wsConnect,
   login,
   receiveMessage,
+  connectionCreated,
 };

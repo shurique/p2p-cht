@@ -28,6 +28,15 @@ function setMessage(message) {
   };
 }
 
+function applyHistory(data) {
+  let { messages } = data;
+
+  return (dispatch) => {
+    dispatch(setMessages(messages));
+  };
+}
+
+
 function newMessage(message) {
   return {
     type: actionTypes.NEW_MESSAGE,
@@ -35,8 +44,23 @@ function newMessage(message) {
   };
 }
 
+function fetchMessages() {
+  return {
+    type: actionTypes.FETCH_MESSAGES,
+  };
+}
+
+function provideMessages() {
+  return {
+    type: actionTypes.PROVIDE_MESSAGES,
+  };
+}
+
 export {
   newMessage,
   setMessages,
   setMessage,
+  fetchMessages,
+  provideMessages,
+  applyHistory,
 };

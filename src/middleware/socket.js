@@ -1,22 +1,13 @@
-import uuid from 'node-uuid';
-
 import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'ws://localhost:3001';
-const USERNAME = `User_${uuid.v4().split('-')[0]}`;
-
-function setOwner(message, username) {
-  return Object.assign({}, message, {
-    owner: message.author === username,
-  });
-}
 
 const socketMiddleware = () => {
   let socket = null;
 
   const onOpen = (ws, store) => (event) => {
-    store.dispatch(actions.login({ username: USERNAME }));
+    store.dispatch(actions.connectionCreated());
   };
 
   const onClose = (ws, store) => (event) => {
@@ -24,16 +15,25 @@ const socketMiddleware = () => {
   };
 
   const onMessage = (ws, store) => (event) => {
-    const data = JSON.parse(event.data);
+    const wsMessage = JSON.parse(event.data);
 
-    console.log('Receive message', data);
-    switch (data.type) {
+    switch (wsMessage.type) {
       case actionTypes.NEW_MESSAGE: {
-        store.dispatch(actions.setMessage(setOwner(data.message, store.getState().chat.username)));
+        store.dispatch(
+          actions.setMessage(wsMessage.message)
+        );
+        break;
+      }
+      case actionTypes.FETCH_MESSAGES: {
+        store.dispatch(actions.provideMessages());
+        break;
+      }
+      case actionTypes.PROVIDE_MESSAGES: {
+        store.dispatch(actions.applyHistory(wsMessage.data));
         break;
       }
       default:
-        store.dispatch(actions.receiveMessage(data));
+        store.dispatch(actions.receiveMessage(wsMessage));
     }
   };
 
@@ -46,16 +46,34 @@ const socketMiddleware = () => {
           socket.onclose = onClose(socket, store);
           socket.onopen = onOpen(socket, store);
         }
-
         break;
       }
       case actionTypes.NEW_MESSAGE: {
         const { message } = action;
         socket.send(JSON.stringify({
-          type: actionTypes.NEW_MESSAGE,
+          type: action.type,
           message,
         }));
-        store.dispatch(actions.setMessage(setOwner(message, store.getState().chat.username)));
+        store.dispatch(actions.setMessage(message));
+        break;
+      }
+      case actionTypes.FETCH_MESSAGES: {
+        socket.send(JSON.stringify({
+          type: action.type,
+        }));
+        break;
+      }
+      case actionTypes.PROVIDE_MESSAGES: {
+        const messages = store.getState().history.messages || [];
+
+        if (messages.length > 0) {
+          socket.send(JSON.stringify({
+            type: action.type,
+            data: {
+              messages,
+            },
+          }));
+        }
         break;
       }
       default:

@@ -2,6 +2,11 @@ export const SET_MESSAGES = 'SET_MESSAGES';
 export const NEW_MESSAGE = 'NEW_MESSAGE';
 export const SET_MESSAGE = 'SET_MESSAGE';
 
-export const LOGIN = 'LOGIN';
 export const WS_CONNECT = 'WS_CONNECT';
+export const CONNECTION_CREATED = 'CONNECTION_CREATED';
+export const LOGIN = 'LOGIN';
 export const RECEIVE_WS_MESSAGE = 'RECEIVE_WS_MESSAGE';
+
+export const FETCH_MESSAGES = 'FETCH_MESSAGES';
+export const PROVIDE_MESSAGES = 'PROVIDE_MESSAGES';
+export const APPLY_HISTORY = 'APPLY_HISTORY';
