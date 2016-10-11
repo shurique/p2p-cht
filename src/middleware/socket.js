@@ -6,35 +6,17 @@ const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'ws://localhost:3001';
 const socketMiddleware = () => {
   let socket = null;
 
-  const onOpen = (ws, store) => (event) => {
+  const onOpen = (ws, store) => () => {
     store.dispatch(actions.connectionCreated());
   };
 
-  const onClose = (ws, store) => (event) => {
-    console.log('Connection closed', event);
+  const onClose = (ws, store) => () => {
+    store.dispatch(actions.connectionClosed());
   };
 
   const onMessage = (ws, store) => (event) => {
     const wsMessage = JSON.parse(event.data);
-
-    switch (wsMessage.type) {
-      case actionTypes.NEW_MESSAGE: {
-        store.dispatch(
-          actions.setMessage(wsMessage.message)
-        );
-        break;
-      }
-      case actionTypes.FETCH_MESSAGES: {
-        store.dispatch(actions.provideMessages());
-        break;
-      }
-      case actionTypes.PROVIDE_MESSAGES: {
-        store.dispatch(actions.applyHistory(wsMessage.data));
-        break;
-      }
-      default:
-        store.dispatch(actions.receiveMessage(wsMessage));
-    }
+    store.dispatch(actions.receiveMessage(wsMessage));
   };
 
   return store => next => (action) => {

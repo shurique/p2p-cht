@@ -16,10 +16,26 @@ function login(data) {
   };
 }
 
-function receiveMessage(data) {
-  return {
-    type: actionTypes.RECEIVE_WS_MESSAGE,
-    data,
+function receiveMessage(wsMessage) {
+  return (dispatch) => {
+    switch (wsMessage.type) {
+      case actionTypes.NEW_MESSAGE: {
+        dispatch(messageActions.setMessage(wsMessage.message));
+        break;
+      }
+      case actionTypes.FETCH_MESSAGES: {
+        dispatch(messageActions.provideMessages());
+        break;
+      }
+      case actionTypes.PROVIDE_MESSAGES: {
+        dispatch(messageActions.applyHistory(wsMessage.data));
+        break;
+      }
+      default:
+        return {};
+    }
+
+    return {};
   };
 }
 
@@ -32,9 +48,16 @@ function connectionCreated() {
   };
 }
 
+function connectionClosed() {
+  return {
+    type: actionTypes.CONNECTION_CLOSED,
+  };
+}
+
 export {
   wsConnect,
   login,
   receiveMessage,
   connectionCreated,
+  connectionClosed,
 };

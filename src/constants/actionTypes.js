@@ -4,6 +4,8 @@ export const SET_MESSAGE = 'SET_MESSAGE';
 
 export const WS_CONNECT = 'WS_CONNECT';
 export const CONNECTION_CREATED = 'CONNECTION_CREATED';
+export const CONNECTION_CLOSED = 'CONNECTION_CLOSED';
+
 export const LOGIN = 'LOGIN';
 export const RECEIVE_WS_MESSAGE = 'RECEIVE_WS_MESSAGE';
 
