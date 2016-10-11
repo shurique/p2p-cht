@@ -4,6 +4,7 @@ import {
   receiveMessage,
   connectionCreated,
   connectionClosed,
+  connectionError,
 } from './cht';
 
 import {
@@ -21,6 +22,7 @@ export {
   receiveMessage,
   connectionCreated,
   connectionClosed,
+  connectionError,
 
   setMessages,
   newMessage,

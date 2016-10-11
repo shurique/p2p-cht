@@ -42,8 +42,11 @@ function receiveMessage(wsMessage) {
 function connectionCreated() {
   const username = `User_${uuid.v4().split('-')[0]}`;
 
-  return (dispatch) => {
-    dispatch(login({ username }));
+  return (dispatch, getState) => {
+    if (!getState().chat.username) {
+      dispatch(login({ username }));
+    }
+
     dispatch(messageActions.fetchMessages());
   };
 }
@@ -54,10 +57,17 @@ function connectionClosed() {
   };
 }
 
+function connectionError() {
+  return {
+    type: actionTypes.CONNECTION_ERROR,
+  };
+}
+
 export {
   wsConnect,
   login,
   receiveMessage,
   connectionCreated,
   connectionClosed,
+  connectionError,
 };

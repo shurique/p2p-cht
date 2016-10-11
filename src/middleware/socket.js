@@ -2,37 +2,58 @@ import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'ws://localhost:3001';
+const TIMEOUT = process.env.REACT_APP_TIMEOUT || 5000;
 
-const socketMiddleware = () => {
-  let socket = null;
+function wsCreate(endpoint, store) {
+  const ws = new WebSocket(endpoint);
 
-  const onOpen = (ws, store) => () => {
+  ws.onopen = () => {
     store.dispatch(actions.connectionCreated());
   };
 
-  const onClose = (ws, store) => () => {
+  ws.onclose = () => {
     store.dispatch(actions.connectionClosed());
   };
 
-  const onMessage = (ws, store) => (event) => {
+  ws.onerror = () => {
+    store.dispatch(actions.connectionError());
+  };
+
+  ws.onmessage = (event) => {
     const wsMessage = JSON.parse(event.data);
     store.dispatch(actions.receiveMessage(wsMessage));
   };
 
-  const wsSend =
-    (ws, type, data = {}) => ws.send(JSON.stringify({ type, data }));
+  return ws;
+}
+
+function wsSend(ws, type, data = {}) {
+  return ws.send(JSON.stringify({ type, data }));
+}
+
+function socketMiddleware() {
+  let socket = null;
+  let reconnectTimer = null;
 
   return store => next => (action) => {
     switch (action.type) {
+      // Socket handlers
       case actionTypes.WS_CONNECT: {
-        if (!socket) {
-          socket = new WebSocket(ENDPOINT);
-          socket.onmessage = onMessage(socket, store);
-          socket.onclose = onClose(socket, store);
-          socket.onopen = onOpen(socket, store);
-        }
+        socket = wsCreate(ENDPOINT, store);
+
+        clearTimeout(reconnectTimer);
+        reconnectTimer = null;
         break;
       }
+      case actionTypes.CONNECTION_CLOSED:
+      case actionTypes.CONNECTION_ERROR: {
+        reconnectTimer = setTimeout(() => {
+          store.dispatch(actions.wsConnect());
+        }, TIMEOUT);
+
+        break;
+      }
+      // App handlers
       case actionTypes.NEW_MESSAGE: {
         wsSend(socket, action.type, { message: action.message });
 
@@ -55,6 +76,6 @@ const socketMiddleware = () => {
         return next(action);
     }
   };
-};
+}
 
 export default socketMiddleware();
