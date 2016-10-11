@@ -1,4 +1,6 @@
 .history_wrap {
+  display: flex;
+  flex-direction: column;
   position: relative;
   height: 100%;
   padding: 70px 0 60px 0;
