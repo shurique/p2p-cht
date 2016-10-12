@@ -1,7 +1,6 @@
 .history_wrap {
   position: relative;
   height: 100%;
-  padding: 70px 0 60px 0;
   background-color: #e6e6e6;
   overflow-y: scroll;
 }
