@@ -40,14 +40,15 @@ function receiveMessage(wsMessage) {
 }
 
 function connectionCreated() {
-  const username = `User_${uuid.v4().split('-')[0]}`;
+  // const username = `User_${uuid.v4().split('-')[0]}`;
 
   return (dispatch, getState) => {
-    if (!getState().chat.username) {
-      dispatch(login({ username }));
-    }
+    console.log('created');
+    // if (!getState().chat.username) {
+    //   dispatch(login({ username }));
+    // }
 
-    dispatch(messageActions.fetchMessages());
+    // dispatch(messageActions.fetchMessages());
   };
 }
 

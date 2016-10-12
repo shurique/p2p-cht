@@ -1,5 +1,7 @@
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import * as actions from '../../actions';
 import JoinForm from './JoinForm';
 
 function mapStateToProps(state) {
@@ -8,9 +10,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: () => {
-      console.log(arguments);
-    },
+    onSubmit: bindActionCreators(actions.login, dispatch),
   };
 }
 

@@ -17,8 +17,16 @@ class JoinForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    const data = {
+      username: this.state.username,
+    };
 
+    if (!data.username) {
+      return;
+    }
+
+    this.props.onSubmit(data);
+    // Clear form
     this.setState({ username: '' });
   }
 
