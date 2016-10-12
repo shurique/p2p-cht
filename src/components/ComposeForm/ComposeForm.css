@@ -5,15 +5,18 @@
   left: 0;
   right: 0;
   margin: auto;
+  min-height: 60px;
+  max-height: 220px;
+
   background: #fff;
-  height: 60px;
 }
 
 .compose_form {
   padding: 10px;
 }
 
-.compose_form .cf_input, .compose_form .cf_controls {
+.compose_form .cf_input,
+.compose_form .cf_controls {
   display: block;
   float: left;
 }
@@ -25,6 +28,8 @@
 
 .compose_form .cf_input .form-control {
   min-height: 38px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .compose_form .cf_controls {
