@@ -1,9 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
-// import HistoryList from '../HistoryList';
-// import ComposeForm from '../ComposeForm';
-import Chat from '../Chat';
-import JoinForm from '../JoinForm';
+import { Link } from 'react-router';
 
 import logo from './logo.svg';
 import './App.css';
@@ -22,9 +18,9 @@ class App extends Component {
       <div className="app">
         <div className="app_header">
           <img src={logo} className="app_logo" alt="logo" />
+          <Link to="/chat">Chat</Link>
         </div>
-        <JoinForm />
-
+        { this.props.children }
       </div>
     );
   }
