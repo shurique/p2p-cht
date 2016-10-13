@@ -1,13 +1,7 @@
-import uuid from 'node-uuid';
+// import uuid from 'node-uuid';
 
 import * as actionTypes from '../constants/actionTypes';
 import * as messageActions from './message';
-
-function wsConnect() {
-  return {
-    type: actionTypes.WS_CONNECT,
-  };
-}
 
 function login(data) {
   return {
@@ -39,36 +33,22 @@ function receiveMessage(wsMessage) {
   };
 }
 
-function connectionCreated() {
-  // const username = `User_${uuid.v4().split('-')[0]}`;
-
-  return (dispatch, getState) => {
-    console.log('created');
-    // if (!getState().chat.username) {
-    //   dispatch(login({ username }));
-    // }
-
-    // dispatch(messageActions.fetchMessages());
-  };
-}
-
-function connectionClosed() {
+function enableUI() {
   return {
-    type: actionTypes.CONNECTION_CLOSED,
+    type: actionTypes.ENABLE_UI,
   };
 }
 
-function connectionError() {
+function disableUI() {
   return {
-    type: actionTypes.CONNECTION_ERROR,
+    type: actionTypes.DISABLE_UI,
   };
 }
+
 
 export {
-  wsConnect,
   login,
   receiveMessage,
-  connectionCreated,
-  connectionClosed,
-  connectionError,
+  enableUI,
+  disableUI,
 };

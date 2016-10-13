@@ -5,7 +5,9 @@ import * as actions from '../../actions';
 import JoinForm from './JoinForm';
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    disabled: state.chat.uiDisabled,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

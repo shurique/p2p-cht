@@ -4,6 +4,11 @@
     "document": true
   },
   "extends": "airbnb",
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
   "rules": {
     "prefer-const": ["off"]
   }

@@ -1,10 +1,15 @@
 import {
   wsConnect,
-  login,
-  receiveMessage,
   connectionCreated,
   connectionClosed,
   connectionError,
+} from './ws';
+
+import {
+  login,
+  receiveMessage,
+  enableUI,
+  disableUI,
 } from './cht';
 
 import {
@@ -18,16 +23,18 @@ import {
 
 export {
   wsConnect,
-  login,
-  receiveMessage,
   connectionCreated,
   connectionClosed,
   connectionError,
 
+  login,
+  receiveMessage,
+  enableUI,
+  disableUI,
+
   setMessages,
   newMessage,
   setMessage,
-
   fetchMessages,
   provideMessages,
   applyHistory,

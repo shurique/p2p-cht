@@ -4,6 +4,7 @@ import './JoinForm.css';
 
 const propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 class JoinForm extends Component {
@@ -35,6 +36,8 @@ class JoinForm extends Component {
   }
 
   render() {
+    const { disabled } = this.props;
+
     return (
       <div className="jf_wrap">
         <form onSubmit={this.handleSubmit}>
@@ -50,10 +53,17 @@ class JoinForm extends Component {
               className="form-control"
               id="username"
               onChange={this.handleUsernameChange}
+              disabled={disabled}
             />
           </div>
 
-          <button type="submit" className="btn btn-default">Connect</button>
+          <button
+            type="submit"
+            className="btn btn-default"
+            disabled={disabled}
+          >
+            Connect
+          </button>
         </form>
       </div>
     );

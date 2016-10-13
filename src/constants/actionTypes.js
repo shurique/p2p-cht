@@ -8,6 +8,8 @@ export const CONNECTION_CLOSED = 'CONNECTION_CLOSED';
 export const CONNECTION_ERROR = 'CONNECTION_ERROR';
 
 export const LOGIN = 'LOGIN';
+export const ENABLE_UI = 'ENABLE_UI';
+export const DISABLE_UI = 'DISABLE_UI';
 export const RECEIVE_WS_MESSAGE = 'RECEIVE_WS_MESSAGE';
 
 export const FETCH_MESSAGES = 'FETCH_MESSAGES';
