@@ -27,8 +27,10 @@ function join(data) {
     });
 
     dispatch(login(data));
+
     prJoin.then(() => {
       browserHistory.push('/chat');
+      dispatch(messageActions.fetchMessages());
     });
   };
 }
