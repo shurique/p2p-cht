@@ -1,4 +1,5 @@
 // import uuid from 'node-uuid';
+import { browserHistory } from 'react-router';
 
 import * as actionTypes from '../constants/actionTypes';
 import * as messageActions from './message';
@@ -7,6 +8,28 @@ function login(data) {
   return {
     type: actionTypes.LOGIN,
     data,
+  };
+}
+
+function join(data) {
+  return (dispatch, getState) => {
+    let prJoin = new Promise((resolve, reject) => {
+      function anyUsername() {
+        if (getState().chat.username) {
+          resolve();
+        }
+        if (getState().uiDisabled) {
+          reject();
+        }
+      }
+
+      setTimeout(anyUsername, 500);
+    });
+
+    dispatch(login(data));
+    prJoin.then(() => {
+      browserHistory.push('/chat');
+    });
   };
 }
 
@@ -47,7 +70,7 @@ function disableUI() {
 
 
 export {
-  login,
+  join,
   receiveMessage,
   enableUI,
   disableUI,

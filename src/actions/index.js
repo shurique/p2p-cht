@@ -6,7 +6,7 @@ import {
 } from './ws';
 
 import {
-  login,
+  join,
   receiveMessage,
   enableUI,
   disableUI,
@@ -27,7 +27,7 @@ export {
   connectionClosed,
   connectionError,
 
-  login,
+  join,
   receiveMessage,
   enableUI,
   disableUI,

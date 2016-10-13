@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: bindActionCreators(actions.login, dispatch),
+    onSubmit: bindActionCreators(actions.join, dispatch),
   };
 }
 
