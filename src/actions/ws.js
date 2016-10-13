@@ -29,13 +29,6 @@ function connectionCreated() {
   return (dispatch) => {
     dispatch(created());
     dispatch(chatActions.enableUI());
-
-
-    // if (!getState().chat.username) {
-    //   dispatch(login({ username }));
-    // }
-
-    // dispatch(messageActions.fetchMessages());
   };
 }
 

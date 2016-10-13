@@ -5,6 +5,7 @@ import './ComposeForm.css';
 const propTypes = {
   author: PropTypes.string.isRequired,
   onMessageSubmit: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 class ComposeForm extends Component {
@@ -33,7 +34,9 @@ class ComposeForm extends Component {
   }
 
   handleTextChange(e) {
-    if (e.ctrlKey && e.keyCode === 13) {
+    const { disabled } = this.props;
+
+    if (!disabled && (e.ctrlKey && e.keyCode === 13)) {
       // Ctrl + Enter
       this.handleSubmit(e);
     } else {
@@ -42,6 +45,8 @@ class ComposeForm extends Component {
   }
 
   render() {
+    const { disabled } = this.props;
+
     return (
       <div className="cf_wrap">
         <form
@@ -58,7 +63,13 @@ class ComposeForm extends Component {
             />
           </div>
           <div className="cf_controls center-block">
-            <button type="submit" className="btn btn-primary">Send</button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={disabled}
+            >
+              Send
+            </button>
           </div>
         </form>
       </div>

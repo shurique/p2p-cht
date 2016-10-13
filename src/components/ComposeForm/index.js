@@ -7,6 +7,7 @@ import ComposeForm from './ComposeForm';
 function mapStateToProps(state) {
   return {
     author: state.chat.username,
+    disabled: state.chat.uiDisabled,
   };
 }
 
