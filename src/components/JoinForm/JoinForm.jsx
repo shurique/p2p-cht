@@ -42,11 +42,6 @@ class JoinForm extends Component {
       <div className="jf_wrap">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="roomID">Room ID:</label>
-            <input type="text" className="form-control" id="roomID" readOnly="readonly" />
-          </div>
-
-          <div className="form-group">
             <label htmlFor="username">Username:</label>
             <input
               type="text"
