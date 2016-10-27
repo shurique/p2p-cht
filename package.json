@@ -8,6 +8,9 @@
   },
   "scripts": {
     "start": "node server.js",
+    "build": "./build.sh",
+    "deploy": "./build.sh && heroku container:release",
+
     "debug": "node --inspect server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

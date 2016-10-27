@@ -3,11 +3,11 @@
 # Remove previous build
 rm -rf build/
 
+# Create new
 (cd frontend;
 yarn install;
 yarn build)
 
 mv frontend/build/ .
 
-docker-compose build web
-docker-compose up web
+docker-compose build
