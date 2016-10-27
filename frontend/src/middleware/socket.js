@@ -1,7 +1,13 @@
 import * as actionTypes from '../constants/actionTypes';
 import * as actions from '../actions';
 
-const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'ws://localhost:3001';
+function getEndpoint() {
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  return `${protocol}://${window.location.host}`;
+}
+
+const ENDPOINT = getEndpoint();
+// const ENDPOINT = `ws://${window.location.host}:` || 'ws://localhost:3001';
 const TIMEOUT = process.env.REACT_APP_TIMEOUT || 5000;
 
 function wsCreate(endpoint, store) {

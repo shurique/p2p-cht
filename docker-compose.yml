@@ -1,0 +1,18 @@
+web:
+  build: .
+  command: 'bash -c ''node server.js'''
+  working_dir: /app/user
+  environment:
+    PORT: 3001
+  ports:
+    - '8080:3001'
+shell:
+  build: .
+  command: bash
+  working_dir: /app/user
+  environment:
+    PORT: 3001
+  ports:
+    - '8080:3001'
+  volumes:
+    - '.:/app/user'

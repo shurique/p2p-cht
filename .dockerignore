@@ -1,0 +1,10 @@
+.git
+.gitignore
+.editorconfig
+.eslintrc
+.dockerignore
+
+npm-debug.log
+build.sh
+
+frontend

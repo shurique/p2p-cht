@@ -1,13 +1,18 @@
 const express = require('express');
+const path = require('path');
 const WebSocketServer = require('ws').Server;
 
 const PORT = process.env.PORT || 3001;
 
+const buildPath = path.join(__dirname + '/build');
+
 const server =
-  express().use((req, res) => {
-    res.send('Hello World!');
-  })
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  express()
+    .use('/static', express.static(path.join(buildPath + '/static')))
+    .use((req, res) => res.sendFile(path.join(buildPath + '/index.html')))
+    .listen(PORT, () => {
+      console.log(`Listening on ${ PORT }`)
+    });
 
 const wss = new WebSocketServer({ server });
 
